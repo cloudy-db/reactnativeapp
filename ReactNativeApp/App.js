@@ -7,14 +7,12 @@
 import React, {Component} from 'react';
 import {MaterialIcons} from 'react-native-vector-icons/MaterialIcons'; // Version can be specified in package.json
 import {TabNavigator, TabBarBottom} from 'react-navigation'; // Version can be specified in package.json
-import {DatePickerDialog} from 'react-native-datepicker-dialog'
-import moment from 'moment'
+import { Container, Header, Content, Card, CardItem, Text, Icon, Right } from 'native-base';
 
 import {Hoshi} from 'react-native-textinput-effects';
 import {
     Platform,
     StyleSheet,
-    Text,
     View,
     ScrollView,
     TouchableOpacity,
@@ -34,9 +32,55 @@ class DashboardScreen extends React.Component {
 class ActivityScreen extends React.Component {
     render() {
         return (
-            <ScrollView>
-            </ScrollView>
-        )
+            <Container>
+                <Content>
+                    <Card>
+                        <CardItem>
+                            <Icon active name="ios-cash" />
+                            <Text>Amount</Text>
+                        </CardItem>
+                        <CardItem>
+                            <Icon active name="logo-usd" />
+                            <Text>Currency</Text>
+                        </CardItem>
+                        <CardItem>
+                            <Icon active name="ios-person" />
+                            <Text>Paid By</Text>
+                        </CardItem>
+                        <CardItem>
+                            <Icon active name="md-calendar" />
+                            <Text>Date</Text>
+                        </CardItem>
+                        <CardItem>
+                            <Icon active name="md-chatboxes" />
+                            <Text>comment</Text>
+                        </CardItem>
+                    </Card>
+                    <Card>
+                        <CardItem>
+                            <Icon active name="ios-cash" />
+                            <Text>Amount</Text>
+                        </CardItem>
+                        <CardItem>
+                            <Icon active name="logo-usd" />
+                            <Text>Currency</Text>
+                        </CardItem>
+                        <CardItem>
+                            <Icon active name="ios-person" />
+                            <Text>Paid By</Text>
+                        </CardItem>
+                        <CardItem>
+                            <Icon active name="md-calendar" />
+                            <Text>Date</Text>
+                        </CardItem>
+                        <CardItem>
+                            <Icon active name="md-chatboxes" />
+                            <Text>comment</Text>
+                        </CardItem>
+                    </Card>
+                </Content>
+            </Container>
+        );
     }
 }
 
