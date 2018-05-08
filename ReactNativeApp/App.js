@@ -40,7 +40,55 @@ class ActivityScreen extends React.Component {
 
 
 class NewBillScreen extends React.Component {
-    
+    constructor(props) {
+        super(props);
+        this.state = {
+            amount: 0,
+            currency: '',
+            paidBy: '',
+            comment: '',
+        };
+    }
+
+    render() {
+        return (
+                <ScrollView
+                    style={textfield.container}
+                    contentContainerStyle={textfield.content}
+                >
+                    <View style={[textfield.card1]}>
+                        <Text style={textfield.title}>New Bill</Text>
+                        <Hoshi
+                            style={textfield.input}
+                            label={'Amount'}
+                            maskColor={'#F9F7F6'}
+                            borderColor={'#7ac1ba'}
+                        />
+                        <Hoshi
+                            style={textfield.input}
+                            label={'Currency'}
+                            maskColor={'#F9F7F6'}
+                            borderColor={'#7ac1ba'}
+                        />
+                        <Hoshi
+                            style={textfield.input}
+                            label={'Paid By'}
+                            maskColor={'#F9F7F6'}
+                            borderColor={'#7ac1ba'}
+                        />
+                        <Hoshi
+                            style={textfield.input}
+                            label={'Comment'}
+                            maskColor={'#F9F7F6'}
+                            borderColor={'#7ac1ba'}
+                        />
+                        <TouchableOpacity style={textfield.buttonContainer}>
+                            <Text style={textfield.buttonText}>Submit</Text>
+                        </TouchableOpacity>
+                    </View>
+                </ScrollView>
+        )
+    }
 }
 
 export default TabNavigator(
