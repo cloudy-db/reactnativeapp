@@ -40,16 +40,29 @@ class ActivityScreen extends React.Component {
 
 
 class NewBillScreen extends React.Component {
-    
-    bill = () => {
-        const payload = {
-            amount: this.amount,
-            currency: this.currency,
-            paidBy: this.paidBy,
-            date: this.date,
-            comment: this.comment
-        }
+    state = {
+        amount: '',
+        currency: '',
+        paidBy: '',
+        date: '',
+        comment: '',
     }
+    getAmount = (text) => {
+        this.setState({ amount: text })
+    }
+    getCurrency = (text) => {
+        this.setState({ currency: text })
+    }
+    getPaidBy = (text) => {
+        this.setState({ paidBy: text })
+    }
+    getDate = (text) => {
+        this.setState({ date: text })
+    }
+    getComment = (text) => {
+        this.setState({ comment: text })
+    }
+
 
     render() {
         return (
