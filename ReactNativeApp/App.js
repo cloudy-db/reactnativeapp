@@ -48,59 +48,70 @@ class NewBillScreen extends React.Component {
         comment: '',
     }
     getAmount = (text) => {
-        this.setState({ amount: text })
+        this.setState({amount: text})
     }
     getCurrency = (text) => {
-        this.setState({ currency: text })
+        this.setState({currency: text})
     }
     getPaidBy = (text) => {
-        this.setState({ paidBy: text })
+        this.setState({paidBy: text})
     }
     getDate = (text) => {
-        this.setState({ date: text })
+        this.setState({date: text})
     }
     getComment = (text) => {
-        this.setState({ comment: text })
+        this.setState({comment: text})
     }
-
+    submit = (amount, currency, paidBy, comment) => {
+        alert('amount: ' + amount + ' currency: ' + currency + ' paidBy ' + paidBy + ' comment ' + comment)
+    }
 
     render() {
         return (
-                <ScrollView
-                    style={textfield.container}
-                    contentContainerStyle={textfield.content}
-                >
-                    <View style={[textfield.card1]}>
-                        <Text style={textfield.title}>New Bill</Text>
-                        <Hoshi
-                            style={textfield.input}
-                            label={'Amount'}
-                            maskColor={'#F9F7F6'}
-                            borderColor={'#7ac1ba'}
-                        />
-                        <Hoshi
-                            style={textfield.input}
-                            label={'Currency'}
-                            maskColor={'#F9F7F6'}
-                            borderColor={'#7ac1ba'}
-                        />
-                        <Hoshi
-                            style={textfield.input}
-                            label={'Paid By'}
-                            maskColor={'#F9F7F6'}
-                            borderColor={'#7ac1ba'}
-                        />
-                        <Hoshi
-                            style={textfield.input}
-                            label={'Comment'}
-                            maskColor={'#F9F7F6'}
-                            borderColor={'#7ac1ba'}
-                        />
-                        <TouchableOpacity style={textfield.buttonContainer}>
-                            <Text style={textfield.buttonText}>Submit</Text>
-                        </TouchableOpacity>
-                    </View>
-                </ScrollView>
+            <ScrollView
+                style={textfield.container}
+                contentContainerStyle={textfield.content}
+            >
+                <View style={[textfield.card1]}>
+                    <Text style={textfield.title}>New Bill</Text>
+                    <Hoshi
+                        style={textfield.input}
+                        label={'Amount'}
+                        maskColor={'#F9F7F6'}
+                        borderColor={'#7ac1ba'}
+                        onChangeText={this.getAmount}
+                    />
+                    <Hoshi
+                        style={textfield.input}
+                        label={'Currency'}
+                        maskColor={'#F9F7F6'}
+                        borderColor={'#7ac1ba'}
+                        onChangeText={this.getCurrency}
+                    />
+                    <Hoshi
+                        style={textfield.input}
+                        label={'Paid By'}
+                        maskColor={'#F9F7F6'}
+                        borderColor={'#7ac1ba'}
+                        onChangeText={this.getPaidBy}
+                    />
+                    <Hoshi
+                        style={textfield.input}
+                        label={'Comment'}
+                        maskColor={'#F9F7F6'}
+                        borderColor={'#7ac1ba'}
+                        onChangeText={this.getComment}
+                    />
+                    
+                    <TouchableOpacity
+                        style={textfield.buttonContainer}
+                        onPress = {
+                            () => this.submit(this.state.amount, this.state.currency, this.state.paidBy, this.state.comment)
+                        }>
+                        <Text style={textfield.buttonText}>Submit</Text>
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
         )
     }
 }
