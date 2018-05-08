@@ -10,7 +10,6 @@ import {TabNavigator, TabBarBottom} from 'react-navigation'; // Version can be s
 import {DatePickerDialog} from 'react-native-datepicker-dialog'
 import moment from 'moment'
 
-
 import {Hoshi} from 'react-native-textinput-effects';
 import {
     Platform,
