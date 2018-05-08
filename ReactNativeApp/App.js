@@ -7,6 +7,9 @@
 import React, {Component} from 'react';
 import {MaterialIcons} from 'react-native-vector-icons/MaterialIcons'; // Version can be specified in package.json
 import {TabNavigator, TabBarBottom} from 'react-navigation'; // Version can be specified in package.json
+import {DatePickerDialog} from 'react-native-datepicker-dialog'
+import moment from 'moment'
+
 
 import {Hoshi} from 'react-native-textinput-effects';
 import {
@@ -62,9 +65,10 @@ class NewBillScreen extends React.Component {
     getComment = (text) => {
         this.setState({comment: text})
     }
-    submit = (amount, currency, paidBy, comment) => {
-        alert('amount: ' + amount + ' currency: ' + currency + ' paidBy ' + paidBy + ' comment ' + comment)
+    submit = (amount, currency, paidBy, date, comment) => {
+        alert('amount: ' + amount + ' currency: ' + currency + ' paidBy: ' + paidBy + ' date: ' + date + ' comment: ' + comment)
     }
+
 
     render() {
         return (
@@ -80,6 +84,7 @@ class NewBillScreen extends React.Component {
                         maskColor={'#F9F7F6'}
                         borderColor={'#7ac1ba'}
                         onChangeText={this.getAmount}
+                        onSubmitEditing={() => this.currencyInput.focus()}
                     />
                     <Hoshi
                         style={textfield.input}
@@ -87,6 +92,8 @@ class NewBillScreen extends React.Component {
                         maskColor={'#F9F7F6'}
                         borderColor={'#7ac1ba'}
                         onChangeText={this.getCurrency}
+                        ref={(input) => this.currencyInput = input}
+                        onSubmitEditing={() => this.paidByInput.focus()}
                     />
                     <Hoshi
                         style={textfield.input}
@@ -94,24 +101,39 @@ class NewBillScreen extends React.Component {
                         maskColor={'#F9F7F6'}
                         borderColor={'#7ac1ba'}
                         onChangeText={this.getPaidBy}
+                        ref={(input) => this.paidByInput = input}
+                        onSubmitEditing={() => this.dateInput.focus()}
                     />
+                    <Hoshi
+                        style={textfield.input}
+                        label={'Date (DD-MM-YYYY)'}
+                        maskColor={'#F9F7F6'}
+                        borderColor={'#7ac1ba'}
+                        onChangeText={this.getDate}
+                        ref={(input) => this.dateInput = input}
+                        onSubmitEditing={() => this.commentInput.focus()}
+                    />
+
                     <Hoshi
                         style={textfield.input}
                         label={'Comment'}
                         maskColor={'#F9F7F6'}
                         borderColor={'#7ac1ba'}
                         onChangeText={this.getComment}
+                        ref={(input) => this.commentInput = input}
                     />
-                    
+
                     <TouchableOpacity
                         style={textfield.buttonContainer}
-                        onPress = {
-                            () => this.submit(this.state.amount, this.state.currency, this.state.paidBy, this.state.comment)
+                        onPress={
+                            () => this.submit(this.state.amount, this.state.currency, this.state.paidBy, this.state.date, this.state.comment)
                         }>
                         <Text style={textfield.buttonText}>Submit</Text>
                     </TouchableOpacity>
                 </View>
+
             </ScrollView>
+
         )
     }
 }
@@ -204,4 +226,35 @@ const textfield = StyleSheet.create({
         color: '#FFFFFF',
         fontWeight: '700'
     }
+});
+
+const dateStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 10,
+        backgroundColor: '#FFFFFF'
+    },
+    content: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10,
+    },
+    datePickerBox:{
+        marginTop: 9,
+        borderColor: '#ABABAB',
+        borderWidth: 0.5,
+        padding: 0,
+        borderTopLeftRadius: 4,
+        borderTopRightRadius: 4,
+        borderBottomLeftRadius: 4,
+        borderBottomRightRadius: 4,
+        height: 38,
+        justifyContent:'center'
+    },
+    datePickerText: {
+        fontSize: 14,
+        marginLeft: 5,
+        borderWidth: 0,
+        color: '#121212',
+    },
 });
