@@ -38,6 +38,9 @@ class ActivityScreen extends React.Component {
                         <CardItem>
                             <Icon active name="ios-cash" />
                             <Text>Amount</Text>
+                            <Right>
+                                <Text>240</Text>
+                            </Right>
                         </CardItem>
                         <CardItem>
                             <Icon active name="logo-usd" />
