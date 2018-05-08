@@ -40,15 +40,7 @@ class ActivityScreen extends React.Component {
 
 
 class NewBillScreen extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            amount: 0,
-            currency: '',
-            paidBy: '',
-            comment: '',
-        };
-    }
+    
 
     render() {
         return (
