@@ -36,48 +36,29 @@ class ActivityScreen extends React.Component {
             <Container>
                 <Content>
                     <Card>
-                        <CardItem>
+                        <CardItem button onPress={() => alert("hi")}>
                             <Icon active name="ios-cash" />
-                            <Text>Amount</Text>
+                            <Text>
+                                Amount
+                            </Text>
                             <Right>
                                 <Text>240</Text>
                             </Right>
+
                         </CardItem>
-                        <CardItem>
+                        <CardItem button onPress={() => alert("hi")}>
                             <Icon active name="logo-usd" />
                             <Text>Currency</Text>
                         </CardItem>
-                        <CardItem>
+                        <CardItem button onPress={() => alert("hi")}>
                             <Icon active name="ios-person" />
                             <Text>Paid By</Text>
                         </CardItem>
-                        <CardItem>
+                        <CardItem button onPress={() => alert("hi")}>
                             <Icon active name="md-calendar" />
                             <Text>Date</Text>
                         </CardItem>
-                        <CardItem>
-                            <Icon active name="md-chatboxes" />
-                            <Text>comment</Text>
-                        </CardItem>
-                    </Card>
-                    <Card>
-                        <CardItem>
-                            <Icon active name="ios-cash" />
-                            <Text>Amount</Text>
-                        </CardItem>
-                        <CardItem>
-                            <Icon active name="logo-usd" />
-                            <Text>Currency</Text>
-                        </CardItem>
-                        <CardItem>
-                            <Icon active name="ios-person" />
-                            <Text>Paid By</Text>
-                        </CardItem>
-                        <CardItem>
-                            <Icon active name="md-calendar" />
-                            <Text>Date</Text>
-                        </CardItem>
-                        <CardItem>
+                        <CardItem button onPress={() => alert("hi")}>
                             <Icon active name="md-chatboxes" />
                             <Text>comment</Text>
                         </CardItem>
