@@ -8,7 +8,6 @@ import React, {Component} from 'react';
 import {MaterialIcons} from 'react-native-vector-icons/MaterialIcons'; // Version can be specified in package.json
 import {TabNavigator, TabBarBottom} from 'react-navigation'; // Version can be specified in package.json
 import { Container, Header, Content, Card, CardItem, Text, Icon, Right } from 'native-base';
-import Swipeout from 'react-native-swipeout';
 
 import {Hoshi} from 'react-native-textinput-effects';
 import {
@@ -31,6 +30,7 @@ class DashboardScreen extends React.Component {
 }
 
 class ActivityScreen extends React.Component {
+
     render() {
         return (
             <Container>
