@@ -8,6 +8,7 @@ import React, {Component} from 'react';
 import {MaterialIcons} from 'react-native-vector-icons/MaterialIcons'; // Version can be specified in package.json
 import {TabNavigator, TabBarBottom} from 'react-navigation'; // Version can be specified in package.json
 import { Container, Header, Content, Card, CardItem, Text, Icon, Right } from 'native-base';
+import Swipeout from 'react-native-swipeout';
 
 import {Hoshi} from 'react-native-textinput-effects';
 import {
@@ -304,3 +305,18 @@ const dateStyles = StyleSheet.create({
         color: '#121212',
     },
 });
+
+let swipeBtns = [
+    {
+        text: 'Delete',
+        backgroundColor: 'red',
+        underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+        onPress: () => { this.deleteNote(rowData) }
+    },
+    {
+        text: 'Duplicate',
+        backgroundColor: 'blue',
+        underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+        onPress: () => { this.duplicateNote(rowData) }
+    }
+];
