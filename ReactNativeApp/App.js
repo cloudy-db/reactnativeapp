@@ -7,7 +7,7 @@
 import React, {Component} from 'react';
 import {MaterialIcons} from 'react-native-vector-icons/MaterialIcons'; // Version can be specified in package.json
 import {TabNavigator, TabBarBottom} from 'react-navigation'; // Version can be specified in package.json
-import { Container, Header, Content, Card, CardItem, Text, Icon, Right } from 'native-base';
+import { Container, Header, Content, Card, CardItem, Text, Icon, Right, Left, List, ListItem, Switch, Body } from 'native-base';
 
 import {Hoshi} from 'react-native-textinput-effects';
 import {
@@ -44,7 +44,6 @@ class ActivityScreen extends React.Component {
                             <Right>
                                 <Text>240</Text>
                             </Right>
-
                         </CardItem>
                         <CardItem button onPress={() => alert("hi")}>
                             <Icon active name="logo-usd" />
@@ -70,7 +69,7 @@ class ActivityScreen extends React.Component {
 }
 
 
-class NewBillScreen extends React.Component {
+class BillScreen extends React.Component {
     state = {
         amount: '',
         currency: '',
@@ -166,11 +165,47 @@ class NewBillScreen extends React.Component {
     }
 }
 
+class SettingScreen extends React.Component {
+    render() {
+        return (
+            <Container>
+                <Content>
+                    <List>
+                        <ListItem icon>
+                            <Left>
+                                <Icon name="md-person-add" />
+                            </Left>
+                            <Body>
+                            <Text>Add to a Network</Text>
+                            </Body>
+                            <Right>
+                                <Icon name="arrow-forward" />
+                            </Right>
+                        </ListItem>
+                        <ListItem icon>
+                            <Left>
+                                <Icon name="md-git-network" />
+                            </Left>
+                            <Body>
+                            <Text>Manage your own network</Text>
+                            </Body>
+                            <Right>
+                                <Icon name="arrow-forward" />
+                            </Right>
+                        </ListItem>
+                    </List>
+                </Content>
+            </Container>
+        );
+    }
+}
+
 export default TabNavigator(
     {
         Dashboard: {screen: DashboardScreen},
         Activity: {screen: ActivityScreen},
-        NewBill: {screen: NewBillScreen}
+        Bill: {screen: BillScreen},
+        Setting: {screen: SettingScreen}
     },
     {
         navigationOptions: ({navigation}) => ({
@@ -181,8 +216,10 @@ export default TabNavigator(
                     iconName = "dashboard";
                 } else if (routeName === 'Activity') {
                     iconName = "activity";
-                } else if (routeName === 'NewBill') {
+                } else if (routeName === 'Bill') {
                     iconName = "bill";
+                } else if (routeName === 'setting') {
+                    iconName = "ios-settings"
                 }
                 // <MaterialIcons name="icon-name" size={20} color="#4F8EF7" />
                 // You can return any component that you like here! We usually use an
