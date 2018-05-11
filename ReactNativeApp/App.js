@@ -5,7 +5,7 @@
  */
 
 import React, {Component} from 'react';
-import {MaterialIcons} from 'react-native-vector-icons/MaterialIcons'; // Version can be specified in package.json
+import {Ionicons} from 'react-native-vector-icons/Ionicons'; // Version can be specified in package.json
 import {TabNavigator, TabBarBottom} from 'react-navigation'; // Version can be specified in package.json
 import { Container, Header, Content, Card, CardItem, Text, Icon, Right, Left, List, ListItem, Switch, Body } from 'native-base';
 
@@ -173,10 +173,10 @@ class SettingScreen extends React.Component {
                     <List>
                         <ListItem icon>
                             <Left>
-                                <Icon name="md-person-add" />
+                                <Icon name="ios-create" />
                             </Left>
                             <Body>
-                            <Text>Add to a Network</Text>
+                            <Text>Create your own network</Text>
                             </Body>
                             <Right>
                                 <Icon name="arrow-forward" />
@@ -184,10 +184,32 @@ class SettingScreen extends React.Component {
                         </ListItem>
                         <ListItem icon>
                             <Left>
-                                <Icon name="md-git-network" />
+                                <Icon name="ios-phone-portrait" />
                             </Left>
                             <Body>
-                            <Text>Manage your own network</Text>
+                            <Text>Allow other device to join your network</Text>
+                            </Body>
+                            <Right>
+                                <Icon name="arrow-forward" />
+                            </Right>
+                        </ListItem>
+                        <ListItem icon>
+                            <Left>
+                                <Icon name="ios-add" />
+                            </Left>
+                            <Body>
+                            <Text>Join other network</Text>
+                            </Body>
+                            <Right>
+                                <Icon name="arrow-forward" />
+                            </Right>
+                        </ListItem>
+                        <ListItem icon>
+                            <Left>
+                                <Icon name="ios-undo" />
+                            </Left>
+                            <Body>
+                            <Text>Reset all configuration</Text>
                             </Body>
                             <Right>
                                 <Icon name="arrow-forward" />
@@ -212,19 +234,19 @@ export default TabNavigator(
             tabBarIcon: ({focused, tintColor}) => {
                 const {routeName} = navigation.state;
                 let iconName;
-                if (routeName === 'Dashboard') {
+                if (routeName === 'ios-clipboard') {
                     iconName = "dashboard";
                 } else if (routeName === 'Activity') {
-                    iconName = "activity";
+                    iconName = "ios-calendar";
                 } else if (routeName === 'Bill') {
-                    iconName = "bill";
+                    iconName = "ios-cash";
                 } else if (routeName === 'setting') {
                     iconName = "ios-settings"
                 }
                 // <MaterialIcons name="icon-name" size={20} color="#4F8EF7" />
                 // You can return any component that you like here! We usually use an
                 // icon component from react-native-vector-icons
-                return <MaterialIcons name={iconName} size={20} color="#4F8EF7"/>;
+                return <Ionicons name={iconName} size={20} color="#4F8EF7"/>;
             },
         }),
         //tabBarComponent: TabBarBottom,
@@ -323,18 +345,3 @@ const dateStyles = StyleSheet.create({
         color: '#121212',
     },
 });
-
-let swipeBtns = [
-    {
-        text: 'Delete',
-        backgroundColor: 'red',
-        underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
-        onPress: () => { this.deleteNote(rowData) }
-    },
-    {
-        text: 'Duplicate',
-        backgroundColor: 'blue',
-        underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
-        onPress: () => { this.duplicateNote(rowData) }
-    }
-];
