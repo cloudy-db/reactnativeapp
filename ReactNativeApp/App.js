@@ -8,22 +8,24 @@ import React, {Component} from 'react';
 import {Ionicons} from 'react-native-vector-icons/Ionicons'; // Version can be specified in package.json
 import {TabNavigator, TabBarBottom} from 'react-navigation'; // Version can be specified in package.json
 import { Container, Header, Content, Card, CardItem, Text, Icon, Right, Left, List, ListItem, Switch, Body } from 'native-base';
-
+import { Scene, Router, Actions, Stack } from 'react-native-router-flux';
 import {Hoshi} from 'react-native-textinput-effects';
+import { RunNumber, Cloudy } from 'cloudy';
 import {
     Platform,
     StyleSheet,
     View,
     ScrollView,
     TouchableOpacity,
-    AsyncStorage
+    AsyncStorage,
+    Button
 } from 'react-native';
+
 
 class DashboardScreen extends React.Component {
     render() {
         return (
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                <Text>Home!</Text>
+            <View>
             </View>
         );
     }
@@ -165,59 +167,93 @@ class BillScreen extends React.Component {
     }
 }
 
+const Setting = () => (
+    <Container>
+        <Content>
+            <List>
+                <ListItem icon onPress={() => {Actions.push('Create')}}>
+                    <Left>
+                        <Icon name="ios-create" />
+                    </Left>
+                    <Body>
+                    <Text>Create your own network</Text>
+                    </Body>
+                    <Right>
+                        <Icon name="arrow-forward" />
+                    </Right>
+                </ListItem>
+                <ListItem icon>
+                    <Left>
+                        <Icon name="ios-phone-portrait" />
+                    </Left>
+                    <Body>
+                    <Text>Allow other device to join your network</Text>
+                    </Body>
+                    <Right>
+                        <Icon name="arrow-forward" />
+                    </Right>
+                </ListItem>
+                <ListItem icon>
+                    <Left>
+                        <Icon name="ios-add" />
+                    </Left>
+                    <Body>
+                    <Text>Join other network</Text>
+                    </Body>
+                    <Right>
+                        <Icon name="arrow-forward" />
+                    </Right>
+                </ListItem>
+                <ListItem icon>
+                    <Left>
+                        <Icon name="ios-undo" />
+                    </Left>
+                    <Body>
+                    <Text>Reset all configuration</Text>
+                    </Body>
+                    <Right>
+                        <Icon name="arrow-forward" />
+                    </Right>
+                </ListItem>
+            </List>
+        </Content>
+    </Container>
+);
+
+const Create = () => (
+    state = {
+        namespace: '',
+    },
+    getNameSpace = (text) => {
+        this.setState({namespace: text})
+    },
+    <View style={[textfield.card1]}>
+        <Hoshi
+            style={textfield.input}
+            label={'Network namespace'}
+            maskColor={'#F9F7F6'}
+            borderColor={'#7ac1ba'}
+            onChangeText={this.getNameSpace}/>
+
+        <Button
+            title="Submit"
+            onPress={() => Actions.push('Setting')}
+            style={styles.container}/>
+    </View>
+);
+
 class SettingScreen extends React.Component {
     render() {
         return (
-            <Container>
-                <Content>
-                    <List>
-                        <ListItem icon>
-                            <Left>
-                                <Icon name="ios-create" />
-                            </Left>
-                            <Body>
-                            <Text>Create your own network</Text>
-                            </Body>
-                            <Right>
-                                <Icon name="arrow-forward" />
-                            </Right>
-                        </ListItem>
-                        <ListItem icon>
-                            <Left>
-                                <Icon name="ios-phone-portrait" />
-                            </Left>
-                            <Body>
-                            <Text>Allow other device to join your network</Text>
-                            </Body>
-                            <Right>
-                                <Icon name="arrow-forward" />
-                            </Right>
-                        </ListItem>
-                        <ListItem icon>
-                            <Left>
-                                <Icon name="ios-add" />
-                            </Left>
-                            <Body>
-                            <Text>Join other network</Text>
-                            </Body>
-                            <Right>
-                                <Icon name="arrow-forward" />
-                            </Right>
-                        </ListItem>
-                        <ListItem icon>
-                            <Left>
-                                <Icon name="ios-undo" />
-                            </Left>
-                            <Body>
-                            <Text>Reset all configuration</Text>
-                            </Body>
-                            <Right>
-                                <Icon name="arrow-forward" />
-                            </Right>
-                        </ListItem>
-                    </List>
-                </Content>
-            </Container>
+            <Router>
+                <Stack>
+                    <Scene key="Setting" component={Setting} />
+                    <Scene key="Create" component={Create} />
+                    <Stack>
+                        <Scene key="Third" component={Setting} />
+                    </Stack>
+                </Stack>
+             </Router>
         );
     }
 }
@@ -235,7 +271,7 @@ export default TabNavigator(
                 const {routeName} = navigation.state;
                 let iconName;
                 if (routeName === 'ios-clipboard') {
-                    iconName = "dashboard";
+                    iconName = "ios-create";
                 } else if (routeName === 'Activity') {
                     iconName = "ios-calendar";
                 } else if (routeName === 'Bill') {
