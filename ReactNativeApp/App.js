@@ -16,7 +16,7 @@ import {
     View,
     ScrollView,
     TouchableOpacity,
-    KeyboardAvoidingView
+    AsyncStorage
 } from 'react-native';
 
 class DashboardScreen extends React.Component {
@@ -325,23 +325,5 @@ const dateStyles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         margin: 10,
-    },
-    datePickerBox:{
-        marginTop: 9,
-        borderColor: '#ABABAB',
-        borderWidth: 0.5,
-        padding: 0,
-        borderTopLeftRadius: 4,
-        borderTopRightRadius: 4,
-        borderBottomLeftRadius: 4,
-        borderBottomRightRadius: 4,
-        height: 38,
-        justifyContent:'center'
-    },
-    datePickerText: {
-        fontSize: 14,
-        marginLeft: 5,
-        borderWidth: 0,
-        color: '#121212',
-    },
+    }
 });
