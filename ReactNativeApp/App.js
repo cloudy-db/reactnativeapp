@@ -99,7 +99,6 @@ class BillScreen extends React.Component {
         alert('amount: ' + amount + ' currency: ' + currency + ' paidBy: ' + paidBy + ' date: ' + date + ' comment: ' + comment)
     }
 
-
     render() {
         return (
             <ScrollView
@@ -168,8 +167,47 @@ class BillScreen extends React.Component {
     }
 }
 
-class CreateScreen extends React.Component {
+class ManageScreen extends React.Component {
+    state = {
+        'namespace': undefined
+    }
 
+    componentDidMount = () => AsyncStorage.getItem('namespace'). then((value) => this.setState = {
+        'namespace': value
+    })
+    render() {
+        return (
+            <View style={[textfield.card1]}>
+                {this.state.namespace ? (
+                    <View>
+                        <Text style={styles.black}>
+                            You have joined a network already
+                        </Text>
+                        <Text style={styles.red}>
+                            {this.state.namespace}
+                        </Text>
+                    </View>
+                ):(
+                    <View>
+                        <Text style={styles.black}>
+                            You have not joined a network yet
+                        </Text>
+                        <Text style={styles.red}>
+                            Swipe the tab bar to "Create" or "Join" to configure your network
+                        </Text>
+                    </View>
+                )}
+
+                <Button style={styles.button}
+                    title="Reset all configuration"
+                    onPress={() => this.resetAll}/>
+            </View>
+        );
+    }
+}
+
+
+class CreateScreen extends React.Component {
     state = {
         'namespace': undefined,
         'result': undefined
@@ -241,13 +279,13 @@ class JoinScreen extends React.Component {
 }
 
 export default TabNavigator(
-
     {
         Dashboard: {screen: DashboardScreen},
         Activity: {screen: ActivityScreen},
         Bill: {screen: BillScreen},
-        Create_Network: {screen: CreateScreen},
-        Join_Network: {screen: JoinScreen},
+        Manage: {screen: ManageScreen},
+        Create: {screen: CreateScreen},
+        Join: {screen: JoinScreen},
     },
     {
         navigationOptions: ({navigation}) => ({
@@ -278,8 +316,7 @@ export default TabNavigator(
         },
         animationEnabled: true,
         swipeEnabled: true,
-    }
-
+    },
 );
 
 let styles = {
@@ -289,28 +326,31 @@ let styles = {
 
     container: {
         margin: 2,
-        marginTop: 24
+        marginTop: 24,
+        padding: 50,
     },
 
     contentContainer: {
         padding: 8,
+        padding: 50,
     },
     black: {
-        padding: 50,
+        padding: 75,
         textAlign: 'center',
         fontStyle: 'normal',
         fontSize: 20,
+
     },
     red: {
-        padding: 50,
+        padding: 75,
         textAlign: 'center',
         fontStyle: 'normal',
         fontSize: 20,
         color: 'red'
     },
     button: {
+        padding: 100,
         margin: 20,
-        padding: 10,
         paddingLeft: 20,
         paddingRight: 20,
         backgroundColor: '#406E9F',
@@ -357,7 +397,7 @@ const textfield = StyleSheet.create({
     },
     buttonContainer: {
         backgroundColor: '#2980b9',
-        paddingVertical: 15
+        paddingVertical: 15,
     },
     buttonText: {
         textAlign: 'center',
