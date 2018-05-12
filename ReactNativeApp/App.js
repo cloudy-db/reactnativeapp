@@ -171,14 +171,16 @@ class BillScreen extends React.Component {
 class CreateScreen extends React.Component {
 
     state = {
-        namespace: undefined,
+        'namespace': undefined,
+        'result': undefined
     }
-    componentDidMount = () => AsyncStorage.getItem('namespace').then((text) => this.setState({
-        'namespace': text
-    }))
+
     getNameSpace = (text) => {
-        AsyncStorage.setItem('namespace', text);
-        this.setState({namespace: text})
+        this.setState({'namespace': text})
+    }
+    storeState = () => {
+        var text = this.state.namespace
+        AsyncStorage.setItem('namespace': text)
     }
 
     render() {
@@ -194,21 +196,9 @@ class CreateScreen extends React.Component {
                 <Button
                     title="Create the network"
                     onPress={() => {
-                        this.getNameSpace
+                        this.storeState
                         Alert.alert("Namespace: \""+this.state.namespace+"\" has been configured")}}
-                    style={styles.container}/>
-                {this.state.namespace ? (
-                    <View>
-                        <Text style={styles.black}>
-                            Network namespace has been set
-                        </Text>
-                        <Text style={styles.red}>
-                            {this.state.namespace}
-                        </Text>
-                    </View>
-                ):(
-                    <Text></Text>
-                )}
+                        style={styles.container}/>
             </View>
         );
     }
@@ -217,14 +207,16 @@ class CreateScreen extends React.Component {
 class JoinScreen extends React.Component {
 
     state = {
-        namespace: '',
+        'namespace': undefined,
+        'result': undefined
     }
-    componentDidMount = () => AsyncStorage.getItem('namespace').then((text) => this.setState({
-        'namespace': text
-    }))
+
     getNameSpace = (text) => {
-        AsyncStorage.setItem('namespace', text);
-        this.setState({namespace: text})
+        this.setState({'namespace': text})
+    }
+    storeState = () => {
+        var text = this.state.namespace
+        AsyncStorage.setItem('namespace': text)
     }
 
     render() {
@@ -240,60 +232,22 @@ class JoinScreen extends React.Component {
                 <Button
                     title="Join the network"
                     onPress={() => {
-                        this.getNameSpace
+                        this.storeState
                         Alert.alert("Namespace: \""+this.state.namespace+"\" has been configured")}}
-                    style={styles.container}/>
-                {this.state.namespace ? (
-                    <View>
-                        <Text style={styles.black}>
-                            You have joined a network already
-                        </Text>
-                        <Text style={styles.red}>
-                            {this.state.namespace}
-                        </Text>
-                    </View>
-                ):(
-                    <Text></Text>
-                )}
+                        style={styles.container}/>
             </View>
         );
     }
 }
-
-class ResetScreen extends React.Component {
-
-    resetAll = () => {
-        AsyncStorage.setItem('namespace', undefined)
-    }
-    componentDidMount = () => AsyncStorage.getItem('namespace').then((text) => this.setState({
-        'namespace': text
-    }))
-    getNameSpace = (text) => {
-        AsyncStorage.setItem('namespace', text);
-        this.setState({namespace: text})
-    }
-
-    render() {
-        return (
-            <View style={styles.center}>
-                <Button
-                    title="Reset all configuration"
-                    onPress={() => this.resetAll}/>
-            </View>
-        );
-    }
-}
-
-
 
 export default TabNavigator(
+
     {
         Dashboard: {screen: DashboardScreen},
         Activity: {screen: ActivityScreen},
         Bill: {screen: BillScreen},
         Create_Network: {screen: CreateScreen},
         Join_Network: {screen: JoinScreen},
-        Reset: {screen: ResetScreen},
     },
     {
         navigationOptions: ({navigation}) => ({
@@ -325,6 +279,7 @@ export default TabNavigator(
         animationEnabled: true,
         swipeEnabled: true,
     }
+
 );
 
 let styles = {
