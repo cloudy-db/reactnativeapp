@@ -18,7 +18,8 @@ import {
     ScrollView,
     TouchableOpacity,
     AsyncStorage,
-    Button
+    Button,
+    Alert
 } from 'react-native';
 
 
@@ -167,95 +168,48 @@ class BillScreen extends React.Component {
     }
 }
 
-const Setting = () => (
-    <Container>
-        <Content>
-            <List>
-                <ListItem icon onPress={() => {Actions.push('Create')}}>
-                    <Left>
-                        <Icon name="ios-create" />
-                    </Left>
-                    <Body>
-                    <Text>Create your own network</Text>
-                    </Body>
-                    <Right>
-                        <Icon name="arrow-forward" />
-                    </Right>
-                </ListItem>
-                <ListItem icon>
-                    <Left>
-                        <Icon name="ios-phone-portrait" />
-                    </Left>
-                    <Body>
-                    <Text>Allow other device to join your network</Text>
-                    </Body>
-                    <Right>
-                        <Icon name="arrow-forward" />
-                    </Right>
-                </ListItem>
-                <ListItem icon>
-                    <Left>
-                        <Icon name="ios-add" />
-                    </Left>
-                    <Body>
-                    <Text>Join other network</Text>
-                    </Body>
-                    <Right>
-                        <Icon name="arrow-forward" />
-                    </Right>
-                </ListItem>
-                <ListItem icon>
-                    <Left>
-                        <Icon name="ios-undo" />
-                    </Left>
-                    <Body>
-                    <Text>Reset all configuration</Text>
-                    </Body>
-                    <Right>
-                        <Icon name="arrow-forward" />
-                    </Right>
-                </ListItem>
-            </List>
-        </Content>
-    </Container>
-);
-
-const Create = () => (
+class CreateScreen extends React.Component {
 
     state = {
         namespace: '',
-    },
+    }
+    componentDidMount = () => AsyncStorage.getItem('namespace').then((text) => this.setState({
+        'namespace': text
+    }))
     getNameSpace = (text) => {
+        AsyncStorage.setItem('namespace', text);
         this.setState({namespace: text})
-    },
+    }
 
-    <View style={[textfield.card1]}>
-        <Hoshi
-            style={textfield.input}
-            label={'Network namespace'}
-            maskColor={'#F9F7F6'}
-            borderColor={'#7ac1ba'}
-            onChangeText={this.getNameSpace}/>
-
-        /*<Button
-            title="Submit"
-            onPress={() => Actions.push('Setting')}
-            style={styles.container}/>*/
-    </View>
-);
-
-class SettingScreen extends React.Component {
     render() {
         return (
-            <Router>
-                <Stack>
-                    <Scene key="Setting" component={Setting} />
-                    <Scene key="Create" component={Create} />
-                    <Stack>
-                        <Scene key="Third" component={Setting} />
-                    </Stack>
-                </Stack>
-             </Router>
+            <View style={[textfield.card1]}>
+                <Hoshi
+                    style={textfield.input}
+                    label={'Network namespace'}
+                    maskColor={'#F9F7F6'}
+                    borderColor={'#7ac1ba'}
+                    onChangeText={this.getNameSpace}/>
+
+                <Button
+                    title="Create"
+                    onPress={() => {
+                        this.getNameSpace
+                        Alert.alert("Namespace: \""+this.state.namespace+"\" has been configured")}}
+                    style={styles.container}/>
+                {this.state.namespace ? (
+                    <View>
+                        <Text style={styles.black}>
+                            Network namespace has been set
+                        </Text>
+                        <Text style={styles.red}>
+                            {this.state.namespace}
+                        </Text>
+                    </View>
+                ):(
+                    <Text></Text>
+                )}
+            </View>
         );
     }
 }
@@ -265,7 +219,9 @@ export default TabNavigator(
         Dashboard: {screen: DashboardScreen},
         Activity: {screen: ActivityScreen},
         Bill: {screen: BillScreen},
-        Setting: {screen: SettingScreen}
+        Create_Network: {screen: CreateScreen},
+        //Join_Network: {screen: JoinScreen},
+        //Reset: {screen: ResetScreen},
     },
     {
         navigationOptions: ({navigation}) => ({
@@ -292,6 +248,7 @@ export default TabNavigator(
         tabBarOptions: {
             activeTintColor: 'orange',
             inactiveTintColor: 'white',
+            scrollEnabled: true,
         },
         animationEnabled: true,
         swipeEnabled: true,
@@ -304,13 +261,26 @@ let styles = {
     },
 
     container: {
-        margin: 8,
+        margin: 2,
         marginTop: 24
     },
 
     contentContainer: {
         padding: 8,
     },
+    black: {
+        padding: 50,
+        textAlign: 'center',
+        fontStyle: 'normal',
+        fontSize: 20,
+    },
+    red: {
+        padding: 50,
+        textAlign: 'center',
+        fontStyle: 'normal',
+        fontSize: 20,
+        color: 'red'
+    }
 
 };
 
@@ -351,18 +321,5 @@ const textfield = StyleSheet.create({
         textAlign: 'center',
         color: '#FFFFFF',
         fontWeight: '700'
-    }
-});
-
-const dateStyles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 10,
-        backgroundColor: '#FFFFFF'
-    },
-    content: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
     }
 });
