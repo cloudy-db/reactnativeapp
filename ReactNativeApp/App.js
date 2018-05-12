@@ -26,12 +26,12 @@ import webRTC from 'react-native-webrtc';
 class DashboardScreen extends React.Component {
 
     render() {
-        console.log('RunNumber & Cloudy', RunNumber, Cloudy);
+        /*console.log('RunNumber & Cloudy', RunNumber, Cloudy);
         const instance = RunNumber.create({
             namespace: 'testing',
             wrtc: webRTC,
         }).then(console.log.bind(console)).catch((err) => console.error.bind(console));
-
+        */
         return (
             <View>
             </View>
@@ -80,12 +80,16 @@ class ActivityScreen extends React.Component {
 
 
 class BillScreen extends React.Component {
+    componentDidMount = () => AsyncStorage.getItem('namespace').then((text) => this.setState({
+        'namespace': text
+    }))
     state = {
         amount: '',
         currency: '',
         paidBy: '',
         date: '',
         comment: '',
+        namespace: '',
     }
     getAmount = (text) => {
         this.setState({amount: text})
@@ -162,7 +166,13 @@ class BillScreen extends React.Component {
                     <TouchableOpacity
                         style={textfield.buttonContainer}
                         onPress={
-                            () => this.submit(this.state.amount, this.state.currency, this.state.paidBy, this.state.date, this.state.comment)
+                            () => {
+                                if (this.state.namespace) {
+                                    this.submit(this.state.amount, this.state.currency, this.state.paidBy, this.state.date, this.state.comment)
+                                } else {
+                                    Alert.alert("Please configure your network first")
+                                }
+                            }
                         }>
                         <Text style={textfield.buttonText}>Submit</Text>
                     </TouchableOpacity>
@@ -178,12 +188,13 @@ class ManageScreen extends React.Component {
     state = {
         namespace: '',
     }
-    componentDidMount = () => AsyncStorage.getItem('namespace').then((text) => this.setState({
+    componentWillMount = () => AsyncStorage.getItem('namespace').then((text) => this.setState({
         'namespace': text
     }))
-    getNamespace = (text) => {
-        AsyncStorage.setItem('namespace', text);
-        this.setState({namespace: text})
+    emptyNamespace = () => {
+        var empty = undefined
+        AsyncStorage.setItem('namespace', undefined);
+        this.setState({namespace: undefined})
     }
 
     render() {
@@ -208,6 +219,11 @@ class ManageScreen extends React.Component {
                         </Text>
                     </View>
                 )}
+                <Button
+                    title="Reset all configuration"
+                    onPress={() => {
+                        this.emptyNamespace}}
+                    style={styles.container}/>
             </View>
         )
     }
@@ -240,13 +256,12 @@ class CreateScreen extends React.Component {
                     title="Create the network"
                     onPress={() => {
                         this.getNamespace
-                        Alert.alert("Namespace: \"" + this.state.namespace + "\"has been configured")}}
+                        Alert.alert("Namespace: " + this.state.namespace + ".\n Please re-launch the app")}}
                     style={styles.container}/>
 
                 {this.state.namespace ? (
                     <View>
                         <Text style={styles.red}>
-                            {this.state.namespace}
                         </Text>
                     </View>
                 ):(
@@ -284,14 +299,11 @@ class JoinScreen extends React.Component {
                     title="Join the network"
                     onPress={() => {
                         this.getNamespace
-                        Alert.alert("Namespace: \"" + this.state.namespace + "\"has been configured")}}
+                        Alert.alert("Namespace: \"" + this.state.namespace + "\" has been configured")}}
                     style={styles.container}/>
 
                 {this.state.namespace ? (
                     <View>
-                        <Text style={styles.red}>
-                            {this.state.namespace}
-                        </Text>
                     </View>
                 ):(
                     <View></View>
