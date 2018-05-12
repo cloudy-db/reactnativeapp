@@ -7,7 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@cloudy-db/bundle": "^0.0.2",
+    "@cloudy-db/bundle": "^0.0.3",
     "eslint": "^4.19.1",
     "native-base": "^2.4.3",
     "react": "16.3.1",

@@ -21,10 +21,17 @@ import {
     Button,
     Alert
 } from 'react-native';
-
+import webRTC from 'react-native-webrtc';
 
 class DashboardScreen extends React.Component {
+
     render() {
+        console.log('RunNumber & Cloudy', RunNumber, Cloudy);
+        const instance = RunNumber.create({
+            namespace: 'testing',
+            wrtc: webRTC,
+        }).then(console.log.bind(console)).catch((err) => console.error.bind(console));
+
         return (
             <View>
             </View>
