@@ -171,7 +171,7 @@ class BillScreen extends React.Component {
 class CreateScreen extends React.Component {
 
     state = {
-        namespace: '',
+        namespace: undefined,
     }
     componentDidMount = () => AsyncStorage.getItem('namespace').then((text) => this.setState({
         'namespace': text
@@ -192,7 +192,7 @@ class CreateScreen extends React.Component {
                     onChangeText={this.getNameSpace}/>
 
                 <Button
-                    title="Create"
+                    title="Create the network"
                     onPress={() => {
                         this.getNameSpace
                         Alert.alert("Namespace: \""+this.state.namespace+"\" has been configured")}}
@@ -214,14 +214,86 @@ class CreateScreen extends React.Component {
     }
 }
 
+class JoinScreen extends React.Component {
+
+    state = {
+        namespace: '',
+    }
+    componentDidMount = () => AsyncStorage.getItem('namespace').then((text) => this.setState({
+        'namespace': text
+    }))
+    getNameSpace = (text) => {
+        AsyncStorage.setItem('namespace', text);
+        this.setState({namespace: text})
+    }
+
+    render() {
+        return (
+            <View style={[textfield.card1]}>
+                <Hoshi
+                    style={textfield.input}
+                    label={'Network namespace'}
+                    maskColor={'#F9F7F6'}
+                    borderColor={'#7ac1ba'}
+                    onChangeText={this.getNameSpace}/>
+
+                <Button
+                    title="Join the network"
+                    onPress={() => {
+                        this.getNameSpace
+                        Alert.alert("Namespace: \""+this.state.namespace+"\" has been configured")}}
+                    style={styles.container}/>
+                {this.state.namespace ? (
+                    <View>
+                        <Text style={styles.black}>
+                            You have joined a network already
+                        </Text>
+                        <Text style={styles.red}>
+                            {this.state.namespace}
+                        </Text>
+                    </View>
+                ):(
+                    <Text></Text>
+                )}
+            </View>
+        );
+    }
+}
+
+class ResetScreen extends React.Component {
+
+    resetAll = () => {
+        AsyncStorage.setItem('namespace', undefined)
+    }
+    componentDidMount = () => AsyncStorage.getItem('namespace').then((text) => this.setState({
+        'namespace': text
+    }))
+    getNameSpace = (text) => {
+        AsyncStorage.setItem('namespace', text);
+        this.setState({namespace: text})
+    }
+
+    render() {
+        return (
+            <View style={styles.center}>
+                <Button
+                    title="Reset all configuration"
+                    onPress={() => this.resetAll}/>
+            </View>
+        );
+    }
+}
+
+
+
 export default TabNavigator(
     {
         Dashboard: {screen: DashboardScreen},
         Activity: {screen: ActivityScreen},
         Bill: {screen: BillScreen},
         Create_Network: {screen: CreateScreen},
-        //Join_Network: {screen: JoinScreen},
-        //Reset: {screen: ResetScreen},
+        Join_Network: {screen: JoinScreen},
+        Reset: {screen: ResetScreen},
     },
     {
         navigationOptions: ({navigation}) => ({
@@ -280,6 +352,21 @@ let styles = {
         fontStyle: 'normal',
         fontSize: 20,
         color: 'red'
+    },
+    button: {
+        margin: 20,
+        padding: 10,
+        paddingLeft: 20,
+        paddingRight: 20,
+        backgroundColor: '#406E9F',
+        borderRadius: 9,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    center: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 
 };
