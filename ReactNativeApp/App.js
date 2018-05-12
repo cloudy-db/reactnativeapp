@@ -221,12 +221,14 @@ const Setting = () => (
 );
 
 const Create = () => (
+
     state = {
         namespace: '',
     },
     getNameSpace = (text) => {
         this.setState({namespace: text})
     },
+
     <View style={[textfield.card1]}>
         <Hoshi
             style={textfield.input}
@@ -235,10 +237,10 @@ const Create = () => (
             borderColor={'#7ac1ba'}
             onChangeText={this.getNameSpace}/>
 
-        <Button
+        /*<Button
             title="Submit"
             onPress={() => Actions.push('Setting')}
-            style={styles.container}/>
+            style={styles.container}/>*/
     </View>
 );
 
@@ -309,6 +311,7 @@ let styles = {
     contentContainer: {
         padding: 8,
     },
+
 };
 
 const textfield = StyleSheet.create({
