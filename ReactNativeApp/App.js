@@ -176,19 +176,23 @@ class BillScreen extends React.Component {
 
 class ManageScreen extends React.Component {
     state = {
-        'namespace': undefined
+        namespace: '',
+    }
+    componentDidMount = () => AsyncStorage.getItem('namespace').then((text) => this.setState({
+        'namespace': text
+    }))
+    getNamespace = (text) => {
+        AsyncStorage.setItem('namespace', text);
+        this.setState({namespace: text})
     }
 
-    componentDidMount = () => AsyncStorage.getItem('namespace'). then((value) => this.setState = {
-        'namespace': value
-    })
     render() {
         return (
             <View style={[textfield.card1]}>
                 {this.state.namespace ? (
                     <View>
                         <Text style={styles.black}>
-                            You have joined a network already
+                            Your network has been configured already
                         </Text>
                         <Text style={styles.red}>
                             {this.state.namespace}
@@ -200,32 +204,26 @@ class ManageScreen extends React.Component {
                             You have not joined a network yet
                         </Text>
                         <Text style={styles.red}>
-                            Swipe the tab bar to "Create" or "Join" to configure your network
+                            Swipe to "Create" or "Join" tab to configure your network
                         </Text>
                     </View>
                 )}
-
-                <Button style={styles.button}
-                    title="Reset all configuration"
-                    onPress={() => this.resetAll}/>
             </View>
-        );
+        )
     }
 }
 
 
 class CreateScreen extends React.Component {
     state = {
-        'namespace': undefined,
-        'result': undefined
+        namespace: '',
     }
-
-    getNameSpace = (text) => {
-        this.setState({'namespace': text})
-    }
-    storeState = () => {
-        var text = this.state.namespace
-        AsyncStorage.setItem('namespace': text)
+    componentDidMount = () => AsyncStorage.getItem('namespace').then((text) => this.setState({
+        'namespace': text
+    }))
+    getNamespace = (text) => {
+        AsyncStorage.setItem('namespace', text);
+        this.setState({namespace: text})
     }
 
     render() {
@@ -236,32 +234,40 @@ class CreateScreen extends React.Component {
                     label={'Network namespace'}
                     maskColor={'#F9F7F6'}
                     borderColor={'#7ac1ba'}
-                    onChangeText={this.getNameSpace}/>
+                    onChangeText={this.getNamespace}/>
 
                 <Button
                     title="Create the network"
                     onPress={() => {
-                        this.storeState
-                        Alert.alert("Namespace: \""+this.state.namespace+"\" has been configured")}}
-                        style={styles.container}/>
+                        this.getNamespace
+                        Alert.alert("Namespace: \"" + this.state.namespace + "\"has been configured")}}
+                    style={styles.container}/>
+
+                {this.state.namespace ? (
+                    <View>
+                        <Text style={styles.red}>
+                            {this.state.namespace}
+                        </Text>
+                    </View>
+                ):(
+                    <View></View>
+                )}
             </View>
-        );
+        )
     }
 }
 
 class JoinScreen extends React.Component {
 
     state = {
-        'namespace': undefined,
-        'result': undefined
+        namespace: '',
     }
-
-    getNameSpace = (text) => {
-        this.setState({'namespace': text})
-    }
-    storeState = () => {
-        var text = this.state.namespace
-        AsyncStorage.setItem('namespace': text)
+    componentDidMount = () => AsyncStorage.getItem('namespace').then((text) => this.setState({
+        'namespace': text
+    }))
+    getNamespace = (text) => {
+        AsyncStorage.setItem('namespace', text);
+        this.setState({namespace: text})
     }
 
     render() {
@@ -272,17 +278,28 @@ class JoinScreen extends React.Component {
                     label={'Network namespace'}
                     maskColor={'#F9F7F6'}
                     borderColor={'#7ac1ba'}
-                    onChangeText={this.getNameSpace}/>
+                    onChangeText={this.getNamespace}/>
 
                 <Button
                     title="Join the network"
                     onPress={() => {
-                        this.storeState
-                        Alert.alert("Namespace: \""+this.state.namespace+"\" has been configured")}}
-                        style={styles.container}/>
+                        this.getNamespace
+                        Alert.alert("Namespace: \"" + this.state.namespace + "\"has been configured")}}
+                    style={styles.container}/>
+
+                {this.state.namespace ? (
+                    <View>
+                        <Text style={styles.red}>
+                            {this.state.namespace}
+                        </Text>
+                    </View>
+                ):(
+                    <View></View>
+                )}
             </View>
-        );
+        )
     }
+
 }
 
 export default TabNavigator(
