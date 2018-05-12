@@ -10,7 +10,7 @@ import {TabNavigator, TabBarBottom} from 'react-navigation'; // Version can be s
 import { Container, Header, Content, Card, CardItem, Text, Icon, Right, Left, List, ListItem, Switch, Body } from 'native-base';
 import { Scene, Router, Actions, Stack } from 'react-native-router-flux';
 import {Hoshi} from 'react-native-textinput-effects';
-import { RunNumber, Cloudy } from 'cloudy';
+import { RunNumber, Cloudy } from '@cloudy-db/bundle';
 import {
     Platform,
     StyleSheet,

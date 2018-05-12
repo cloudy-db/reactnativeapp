@@ -7,7 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "cloudy": "git+https://github.com/cloudy-db/js.git",
+    "@cloudy-db/bundle": "^0.0.2",
     "eslint": "^4.19.1",
     "native-base": "^2.4.3",
     "react": "16.3.1",
@@ -20,6 +20,7 @@
     "react-native-storage": "^0.2.2",
     "react-native-textinput-effects": "^0.4.2",
     "react-native-vector-icons": "^4.6.0",
+    "react-native-webrtc": "git+https://github.com/nazar-pc/react-native-webrtc.git#patch-1",
     "react-navigation": "^2.0.0",
     "react-redux": "^5.0.7"
   },
